@@ -12,10 +12,13 @@ SCP = scp -C -p
 
 .PHONY: all opt byte native install uninstall reinstall htdoc doc test tests
 
-all byte native opt: configure
+all byte native opt:
 	ocaml setup.ml -build
 
-configure: setup.ml
+configure-release: setup.ml
+	ocaml $< -configure --disable-tests
+
+configure-test: setup.ml
 	ocaml $< -configure --enable-tests
 
 setup.ml: _oasis

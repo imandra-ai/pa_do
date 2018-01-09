@@ -1,0 +1,23 @@
+opam-version: "1.2"
+maintainer: "vb@luminar.eu.org"
+build: [
+  [make "configure-release"]
+  [make]
+]
+install: [make "install"]
+authors: [
+  "Christophe Troestler <Christophe.Troestler@umons.ac.be>"
+  "Dany Maslowski <dan_mski@hotmail.com>"
+  "Julie De Pril <julie.depril@umons.ac.be>"
+]
+remove: [["ocamlfind" "remove" "pa_do"]]
+depends: [
+  "ocamlfind"
+  "ocamlbuild" {build}
+  "camlp4"
+  "base-num"
+]
+available: [ocaml-version <= "4.01.0"] # TODO remove
+homepage: "https://github.com/AestheticIntegration/pa_do"
+dev-repo: "https://github.com/AestheticIntegration/pa_do.git"
+bug-reports: "https://github.com/AestheticIntegration/pa_do/issues"
