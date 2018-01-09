@@ -1,0 +1,5 @@
+
+WEB=forge.ocamlcore.org:/home/groups/pa-do/htdocs/
+
+web:
+  scp -C $(glob *.html *.png) $(WEB)

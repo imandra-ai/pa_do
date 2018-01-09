@@ -1,0 +1,24 @@
+PP = $(PP_SYNTAX)
+OCAMLDEPFLAGS = -pp "$(PP)"
+OCAMLPPFLAGS = -pp "$(PP)"
+
+#BYTE_ENABLED = true # debug exceptions
+
+# Tell the dependency which cannot be inferred from the source file:
+# NeedCamlp4Extension(use, pa_fol)
+# NeedCamlp4Extension(fol, pa_fol)
+
+COMPILED_PGM = $(OCamlProgram contraction, Interval contraction)
+.DEFAULT: $(COMPILED_PGM)
+
+# Show the result of the Camlp4 transformation
+.PHONY: show
+show:
+  $(PP) -printer o contraction.ml
+
+
+clean:
+  rm -f $(glob *~ *.annot *.cmi *.cmo *.cma *.cmx *.o) $(COMPILED_PGM)
+
+
+

@@ -1,0 +1,265 @@
+<html>
+  <head>
+    <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+    <link rel="shortcut icon"
+	  href="http://bazaar-vcs.org/Welcome?action=AttachFile&do=get&target=favicon.ico"
+	  type="image/x-icon"/>
+    <style type="text/css">
+      h1 { font-family: Arial,Helvetica,sans-serif;
+      background-color: rgb(51, 51, 0);
+      text-align: center;
+      padding-top: 0.6ex;
+      padding-bottom: 0.6ex;
+      color: rgb(224, 220, 230);
+      }
+      h2 { font-family: Arial,Helvetica,sans-serif;
+      margin-bottom: 1ex;
+      margin-top: 2.5ex;
+      }
+      h3 { font-family: Arial,Helvetica,sans-serif;
+      margin-bottom: 0.5ex;
+      margin-top: 2ex;
+      font-style: italic;
+      font-weight: normal;
+      font-size: 120%;
+      }
+      code { color: #0000be; }
+      pre {
+      border-style: none;
+      border-width: 1px;
+      padding: 1ex;
+      background-image: url("https://forge.ocamlcore.org/themes/gforge/images/vert-grad.png");
+      background-color: rgb(191, 191, 191);
+      color: #0000be;
+      }
+      a img { border: 0px none; }
+      #toc {
+      width: 20%;
+      display: block;
+      float: right
+      }
+      .toc_entry {
+      font-family: Arial,Helvetica,sans-serif;
+      text-decoration: none;
+      }
+    </style>
+    <title>HOWTO use bzr with OCamlForge</title>
+  </head>
+  <body>
+    <h1>HOWTO use bzr with OCamlForge</h1>
+
+    <div id="toc">
+    <table cellspacing="0" cellpadding="0" width="100%" border="0"
+	   background="https://forge.ocamlcore.org/themes/gforge/images/vert-grad.png">
+      <tr align="center">
+	<td valign="top" align="right" width="10"
+	    background="https://forge.ocamlcore.org/themes/gforge/images/box-topleft.png"
+	    ><img src="https://forge.ocamlcore.org/themes/gforge/images/clear.png" width="10"
+		  height="20" /></td>
+	<th width="100%" background="https://forge.ocamlcore.org/themes/gforge/images/box-grad.png"
+	    ><span class="titlebar">Table of contents</span></th>
+	<td valign="top" width="10"
+	    background="https://forge.ocamlcore.org/themes/gforge/images/box-topright.png"
+	    ><img src="https://forge.ocamlcore.org/themes/gforge/images/clear.png" width="10"
+		  height="20" /></td>
+      </tr>
+      <tr>
+	<td colspan="3">
+	  <table cellspacing="2" cellpadding="2" width="100%" border="0">
+	    <tr align="left">
+	      <td colspan="2">
+		<a href="#bazaar" class="toc_entry">Bazaar</a><br />
+		<a href="#access" class="toc_entry">Developer access</a><br />
+		<a href="#newrepo" class="toc_entry"
+		   >Setting up your repository</a><br />
+		<a href="#faq" class="toc_entry">FAQ</a><br />
+		&nbsp;
+	      </td>
+	    </tr>
+	  </table>
+	</td>
+      <tr>
+    </table>
+    </div>
+
+
+    <h2 id="bazaar">Bazaar</h2>
+
+    <p><a href="http://bazaar-vcs.org/">Bazaar</a> (also known
+      as <code>bzr</code>) is an easy to use, distributed, version
+      control system with an emphasis
+      on <a href="http://bazaar-vcs.org/Bzr">correctness</a>
+      and <a href="http://ianclatworthy.wordpress.com/2007/07/11/wanted-rock-solid-version-control/"
+      >robustness</a> that allows a great variety
+      of <a href="http://bazaar-vcs.org/Workflows">workflows</a>.
+
+      <!-- It has a
+      reputation of slowness (because making the right design was put
+      first) but it is no longer true (bzr is a fast moving target
+      with new improvements about every month). -->
+    </p>
+    <p>
+      Before going any further, we recommend you read
+      the <a href="http://doc.bazaar-vcs.org/bzr.dev/en/mini-tutorial/index.html"
+      >five minute tutorial</a>.  The explanations below are just
+      meant to help you to find your marks.  It emphasizes the points
+      specific to OCamlForge.  Please refer to
+      the <a href="http://bazaar-vcs.org/Documentation">official
+      documentation</a> for more details.
+    </p>
+
+
+    <h2 id="access">Developer access to an existing repository</h2>
+
+    <ul>
+      <li>
+	A
+	recommended <a href="http://bazaar-vcs.org/Workflows">workflow</a>
+	is to keep a copy of the upstream branch and develop in
+	"feature/bugfix branches".  To improve space efficiency, let
+	us start by creating a shared repository (if you do not want
+	to do this, you can skip to the next point):
+
+	<pre>bzr&nbsp;init-repo&nbsp;<em class="replaceable">unix-name</em></pre>
+
+	where <code><em class="replaceable">unix-name</em></code> is
+	be the directory that will hold your branches.  You can name
+	it whatever you like but to ease remembering its content I
+	usually use the
+	<em class="replaceable">unix-name</em> or
+	the <em class="replaceable">module-name</em> of the project.
+      </li>
+      <li>
+	Go to the directory you just created
+	<pre>cd&nbsp;<em class="replaceable">unix-name</em></pre> and
+	get a copy of the main development branch:
+
+	<pre>bzr&nbsp;branch&nbsp;sftp://bzr.ocamlcore.org//bzrroot/<em class="replaceable">unix-name</em>/<em class="replaceable">module-name</em>/<em class="replaceable">trunk</em>/</pre>
+
+	This will create a
+	directory <code><em class="replaceable">trunk</em></code> with
+	the branch.  (The module name and its main branch name
+	&mdash;&nbsp;frequently
+	called <code><em class="replaceable">trunk</em></code> as
+	above&nbsp;&mdash; should be given to you by the other
+	developers of the project.  If it is not the case, log in to
+	<code>bzr.ocamlcore.org</code> and do <code>ls -R
+	/bzrroot/<em class="replaceable">unix-name</em></code>.)
+
+	You can update that copy with <code>bzr&nbsp;pull</code>
+	(being in the
+	directory <code><em class="replaceable">trunk</em></code>).
+      </li>
+      <li> Develop your features in separate branches.  To make a
+	branch,
+	say <code><em class="replaceable">feature-XXX</em></code>, do:
+
+	<pre>bzr&nbsp;branch&nbsp;<em class="replaceable">trunk</em>&nbsp;<em class="replaceable">feature-XXX</em></pre>
+
+      </li>
+      <li> Finally, make your changes public by pushing them to the
+	main branch 
+
+	<pre>bzr&nbsp;push&nbsp;sftp://bzr.ocamlcore.org//bzrroot/<em class="replaceable">unix-name</em>/<em class="replaceable">module-name</em>/<em class="replaceable">trunk</em>/</pre>
+
+	or to a (new) branch
+
+	<pre>bzr&nbsp;push&nbsp;sftp://bzr.ocamlcore.org//bzrroot/<em class="replaceable">unix-name</em>/<em class="replaceable">module-name</em>/<em class="replaceable">feature-XXX</em>/</pre>
+
+	(the push must only be specified the first time, afterwards
+	you can just write
+	<code>bzr&nbsp;push</code> and <code>bzr</code> will use the
+	remembered URL).
+      </li>
+    </ul>
+
+
+    <h2 id="newrepo">Setting up your repository on OCamlForge</h2>
+    <ul>
+      <li>
+	Ask the OCamlForge team to create the root of your repository
+	<code>/bzrroot/<em class="replaceable">unix-name</em></code>
+	where you will store all your modules and branches &mdash;
+	this is their only duty, the rest is yours!  Make sure that
+	you have a ssh key set up in your ocamlforge account and that
+	you can access the shell (<code>ssh bzr.ocamlcore.org</code>).
+      </li>
+      <li>In order for your repositories to be writable by all members of
+	your team, they need to be created with group write premission.
+	To do that, upload a <code>.bashrc</code> file with
+
+	<pre>scp&nbsp;.bashrc&nbsp;shell.forge.ocamlcore.org:</pre>
+
+	where <code>.bashrc</code> must contain (at least):
+	<pre>umask 0002</pre>
+      </li>
+      <li>
+	We suggest that you start by creating a shared repository for
+	disk space efficiency (that will enable history to be shared
+	between your branches):
+
+	<pre>bzr&nbsp;init-repo&nbsp;--no-trees&nbsp;sftp://bzr.ocamlcore.org//bzrroot/<em class="replaceable">unix-name</em>/<em class="replaceable">module-name</em></pre>
+
+	Then, to push a branch that you have on your disk &mdash; let
+	us call it <code><em class="replaceable">trunk</em></code>
+	&mdash;, <code>cd</code> into it and issue
+
+	<pre>bzr&nbsp;push&nbsp;sftp://bzr.ocamlcore.org//bzrroot/<em class="replaceable">unix-name</em>/<em class="replaceable">module-name</em>/<em class="replaceable">trunk</em>/</pre>
+
+	(this is for the first time only, <code>bzr</code> will
+	remember the location so you will only have to write <code>bzr
+	push</code>).
+      </li>
+    </ul>
+
+    <h2 id="faq">FAQ</h2>
+
+
+    <h3>Login name</h3> If your ocamlcore login name &mdash; let us
+    call it <code><em class="replaceable">logcore</em></code> &mdash;
+    is different from your local machine login, you have two
+    possibilities.  First, you can specify it in the URL:
+    <pre>sftp://<em class="replaceable">logcore</em>@bzr.ocamlcore.org//bzrroot/<em>...</em></pre>
+    Second, if you use openssh, create a
+    file <code>~/.ssh/config</code> containing
+	
+    <pre>Host *.ocamlcore.org
+  User <em class="replaceable">logcore</em>
+  Compression yes</pre>
+
+    <h3>bzr&nbsp;&le;&nbsp;1.5</h3>
+
+    If you use bzr&nbsp;&le;&nbsp;1.5 (and do not want to upgrade),
+    you must take care of a couple of additional things due to
+    a <a href="https://bugs.launchpad.net/bzr/+bug/50568" >sftp
+    bug</a> deleting the <code>sgid</code> bit (a workaround has been
+    commited in bzr&nbsp;1.6).
+
+    First, when you create your repository, choose a packed format
+    with <code>--pack-0.92</code> or <code>--rich-root-pack</code>.
+    With <code>--rich-root-pack</code>, you have the added bonus that
+    you will also be able to use
+    the <a href="http://bazaar-vcs.org/BzrForeignBranches/Subversion"
+    >bzr-svn plugin</a> to store your history under SVN.
+
+    Second, after the <em>first</em> push of a branch, you must enable
+    the sgid bit on your directories.  To do that, <code>ssh
+    bzr.ocamlcore.org</code> and issue
+
+    <pre>cd /bzrroot/<em class="replaceable">unix-name</em>/<em class="replaceable">module-name</em>/
+chgrp -R scm_<em class="replaceable">unix-name</em> .
+find . -type d -exec chmod g+s {} \;</pre>
+
+    You do not need to do this after subsequent pushes of the same
+    branch.  (The reason for choosing a pack format here &mdash; in
+    addition to their better efficiency &mdash; is that no new
+    directories will be created after the initial push.)
+
+
+    <br/><br/>
+    <a href="http://www.ocamlcore.org/"><img src="http://caml.inria.fr//pub/logos/caml.128x58.gif"
+    /></a>
+
+    <br/>
+  </body>
+</html>

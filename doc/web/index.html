@@ -1,0 +1,368 @@
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <link type="image/ico" rel="icon"
+	  href="http://caml.inria.fr/styles/icons/caml.ico" />
+    <style type="text/css">
+      h1 { font-family: Arial,Helvetica,sans-serif;
+      background-color: rgb(51, 51, 0);
+      text-align: center;
+      padding-top: 0.6ex;
+      padding-bottom: 0.6ex;
+      color: rgb(224, 220, 230);
+      }
+      h2 { font-family: Arial,Helvetica,sans-serif;
+      margin-bottom: 1ex;
+      margin-top: 2.5ex;
+      }
+      h3 { font-family: Arial,Helvetica,sans-serif;
+      margin-bottom: 0.5ex;
+      margin-top: 2ex;
+      font-style: italic;
+      font-weight: bold;
+      font-size: 120%;
+      }
+      code { color: #0000be; }
+      pre { border-style: none;
+      border-width: 1px;
+      padding: 1ex;
+      background-image: url("https://forge.ocamlcore.org/themes/gforge/images/vert-grad.png");
+      background-color: rgb(191, 191, 191);
+      color: #0000be;
+      }
+      a img { border: 0px none; }
+      #toc {
+      width: 20%;
+      display: block;
+      float: left;
+      }
+      .toc_entry {
+      font-family: Arial,Helvetica,sans-serif;
+      padding: 0.3ex 0.2ex;
+      }
+      .toc_entry a {
+      text-decoration: none;
+      }
+      #main {
+      width: 77%;
+      display: block;
+      float: right;
+      padding: 1ex;
+      }
+    </style>
+    <title>Delimited overloading</title>
+  </head>
+  <body>
+
+    <h1>Delimited overloading</h1>
+
+    <div id="toc">
+    <table cellspacing="0" cellpadding="0" width="100%" border="0"
+	   background="https://forge.ocamlcore.org/themes/gforge/images/vert-grad.png">
+      <tr align="center">
+	<td valign="top" align="right" width="10"
+	    background="https://forge.ocamlcore.org/themes/gforge/images/box-topleft.png"
+	    ><img src="https://forge.ocamlcore.org/themes/gforge/images/clear.png" width="10"
+		  height="20" /></td>
+	<th width="100%" background="https://forge.ocamlcore.org/themes/gforge/images/box-grad.png"
+	    ><span class="titlebar">Table of contents</span></th>
+	<td valign="top" width="10"
+	    background="https://forge.ocamlcore.org/themes/gforge/images/box-topright.png"
+	    ><img src="https://forge.ocamlcore.org/themes/gforge/images/clear.png"
+		  width="10"  height="28" /></td>
+      </tr>
+      <tr align="left"><td></td><td class="toc_entry">
+	  <a href="#pa_do">pa_do</a></td></tr>
+      <tr align="left"><td></td><td class="toc_entry">
+	  <a href="#macro">Macro</a></td></tr>
+      <tr align="left"><td></td><td class="toc_entry">
+	  <a href="#pa_infix">pa_infix</a></td></tr>
+      <tr align="left"><td></td><td class="toc_entry">
+	  <a href="#contributing">Contributing</a></td></tr>
+    </table>
+    <br/>
+
+    <!-- Second menu -->
+    <table cellspacing="0" cellpadding="0" width="100%" border="0"
+	   background="https://forge.ocamlcore.org/themes/gforge/images/vert-grad.png">
+      <tr align="center">
+	<td valign="top" align="right" width="10"
+	    background="https://forge.ocamlcore.org/themes/gforge/images/box-topleft.png"
+	    ><img src="https://forge.ocamlcore.org/themes/gforge/images/clear.png" width="10"
+		  height="20" /></td>
+	<th width="100%" background="https://forge.ocamlcore.org/themes/gforge/images/box-grad.png"
+	    ><span class="titlebar">Public areas</span></th>
+	<td valign="top" width="10"
+	    background="https://forge.ocamlcore.org/themes/gforge/images/box-topright.png"
+	    ><img src="https://forge.ocamlcore.org/themes/gforge/images/clear.png"
+		  width="10"  height="28" /></td>
+      </tr>
+      <tr align="left"><td></td><td class="toc_entry">
+	  <a href="api/">API (ocamldoc)</a></td></tr>
+      <tr align="left"><td></td><td class="toc_entry">
+	  <a href="http://forge.ocamlcore.org/frs/?group_id=40"
+	     >Download</a></td></tr>
+      <tr align="left"><td></td><td class="toc_entry">
+	  <a href="http://forge.ocamlcore.org/projects/pa-do/"
+	     >Summary</a></td></tr>
+      <tr align="left"><td></td><td class="toc_entry">
+	  <a href="http://forge.ocamlcore.org/forum/forum.php?forum_id=218"
+	     >News</a></td></tr>
+      <tr align="left"><td></td><td class="toc_entry">
+	  <a href="http://forge.ocamlcore.org/tracker/?group_id=40"
+	     >Tracker</a></td></tr>
+    </table>
+
+    <br/><br/><br/><br/><br/>
+
+    <a href="http://caml.inria.fr/"><img src="http://caml.inria.fr//pub/logos/caml.128x58.gif"
+    /></a>
+
+    </div> <!-- toc -->
+
+    <!-- -------------------- Main -------------------- -->
+    <div id="main">
+      <p>
+	<em>Delimited overloading</em> is a syntax extension to ease
+      the writing of efficient arithmetic expressions in OCaml.  This
+      project was sponsored
+      by <a href="http://www.janestcapital.com/">Jane Street
+      Capital</a> during
+      their <a href="http://osp.janestcapital.com/wordpress/">OCaml
+      Summer Project&nbsp;2008</a>.  We are very grateful for their
+      support.  See
+      the <a href="http://osp.janestcapital.com/files/delimited-overloading.pdf">complete
+      proposal (PDF)</a>.
+    </p>
+    <p>
+      This project is hosted on
+      <a href="https://forge.ocamlcore.org/projects/pa-do/">OCamlForge</a>.
+    </p>
+
+    <h2>Description</h2>
+
+    <p>This project provides 
+      <a href="api/">three syntax extensions</a> provided by several
+      modules.  The information below should give you a taste of the
+      possibilities of these syntax extensions but the main reference
+      is the <a href="api/">ocamldoc help</a>.
+    </p>
+
+    <h3 id="pa_do">pa_do</h3>
+
+    <p>This module allows to locally overload operators and functions.
+      The syntax
+      is <code><em class="replaceable">X</em>.(<em class="replaceable">e</em>)</code>
+      where <code><em class="replaceable">X</em></code> is a module
+      name and <code><em class="replaceable">e</em></code> is an
+      expression.  For example, you can write
+      
+      <pre>Big_int.( 23 ** 567 mod 45 + "123456789123456789123456789")
+Int64.(float(q * of_int n - (s * s) lsr 3)) /. float n
+Int32.(incr x)</pre>
+      <!-- http://www.podval.org/~sds/ocaml-sucks.html -->
+
+      and this will be transformed into the
+      appropriate <code>Big_int</code>, <code>Int64</code>,
+      and <code>Int32</code> function calls (the string will be
+      checked to represent a valid <code>Big_int</code> at compile
+      time).  The standard OCaml numeric
+      modules <code>Int32</code>, <code>Int64</code>, <code>Nativeint</code>,
+      <code>Complex</code> (provided by the <a href="api/Numeric.html"
+      ><code>Pa_do.Numeric</code></a>
+      module), <code>Num</code>, <code>Big_int</code>
+      and <code>Ratio</code> (in a separate
+      extension <a href="api/Pa_do_nums.html" >pa_do_nums</a> because
+      they require the <code>nums.cma</code> library to be loaded in
+      camlp4 for static checking) are overloaded, as well as two
+      "phantom" modules <code>Int</code> and <code>Float</code>.
+      The <code>Complex</code> module use the name <code>I</code> to
+      denote the imaginary unit so one can write
+
+      <pre>Complex.(log(z + 2I) = I / u)</pre>
+    </p>
+    <p>
+      You can easily define your own overloadings by either using the
+      <a href="api/Delimited_overloading.html">concrete syntax</a> or
+      the <a href="api/Delimited_overloading.html">API</a>.  As an
+      example, suppose you have a module <code>X</code> that defines
+      the usual arithmetic
+      functions, <code>add</code>, <code>sub</code>,
+      <code>mul</code>, <code>div</code> <em>and</em> the unary
+      negation <code>neg</code>.  To be able to write expressions
+      using the usual arithmetic operators, like <code>X.(x * y +
+      z)</code>, simply put
+
+      <pre>OVERLOAD_ARITHMETIC X</pre>
+
+      at the beginning of your source file.
+
+      As another example, let us use
+      the <a href="http://ocaml-rope.sourceforge.net/"
+      ><code>Rope</code></a> library.  To make it more
+      like strings, one can declare
+
+      <pre>OVERLOAD_STRING Rope(of_string)
+OVERLOAD_COMPARISON Rope(compare)
+OVERLOAD Rope((^) -&gt; concat2)
+OVERLOAD_STRING_GET Rope(get)</pre>
+
+      With this one can just write <code>Rope.(if max s u &lt;= "pre" ^ u
+      then s.[0] else u.[0])</code>.  Finally, for a polynomial
+      module <code>Poly</code> on the field of the reals, one probably
+      would like to use (the name of the functions have been chosen to
+      be self-documenting):
+
+      <pre>OVERLOAD_INT Poly(constant_int_poly)
+OVERLOAD_FLOAT Poly(constant_poly)
+OVERLOAD_ARITHMETIC Poly
+OVERLOAD Poly((=) -&gt; equal; (&lt;&gt;) -&gt; not_equal; ( ** ) -&gt; pow)
+OVERLOAD_POLY_VAR Poly(var_of_string)</pre>
+
+      Then one can use the natural looking <code>let p = Poly.(1 + `x
+      * `x + `x * `y + `x**k)</code> to declare the
+      polynomial <code>q</code> with variables <code>x</code>
+      and <code>y</code>.  Note that the library caches the evaluation
+      of constants so there will actually be only a
+      single <code>var_of_string "x"</code> for the entire source
+      file.  To support <code>Poly.(`x**2)</code>,
+      where <code>2</code> has <em>not</em> to be transformed into a
+      polynomial, one has to add a new rule with the
+      <a href="api/Delimited_overloading.html#VALconstants"
+	 ><code>constants</code></a> function from
+	 the <a href="api/Delimited_overloading.html" >API</a>.
+    </p>
+    <p>
+      Of course, to avoid putting the OVERLOAD declarations in every
+      source file, one would usually prefer to write a syntax
+      extension module and perform these tasks with
+      the <a href="api/Delimited_overloading.html">Delimited
+      overloading API</a>.
+    </p>
+
+    <h3 id="macro">Macro</h3>
+
+    <p><code>Pa_do.Macro</code> enables macros compatible with
+      delimited overloading—and with other syntax extensions by
+      means of a
+      <a href="http://pa-do.forge.ocamlcore.org/api/Macro.html"
+	 >clear API</a>.  They provide a way write ad-hoc
+      polymorphic code.  They also correct some design flaws of the
+      original macros (especially the interaction
+      of <code>IFDEF</code> and <code>DEFINE</code>).
+    </p>
+    <p>As a simple example of what macros enable you to do, here is a
+      generic "incrementor":
+
+      <pre>DEFINE INCR(M,x) = M.(x := !x + 1)</pre>
+
+      You can then use it with <code>INCR(Int,
+      x)</code>, <code>INCR(Float, x)</code>,...  As a more
+      interesting example, here is a generic implementation of a
+      Runge-Kutta scheme of order&nbsp;4 parametrized by a vector
+      space V (assuming that "<code>+</code>" is overloaded as the
+      vector addition and "<code>*</code>" denotes the scalar
+      multiplication with the floats first):
+      
+      <pre>DEFINE RK4(M) =
+  let onesixth = 1. /. 6.
+  and onethird = 1. /. 3. in
+  fun ?(n=200) f t0 t1 x0 ->
+    let h = (t1 -. t0) /. float n in
+    let xt = Array.make (n + 1) x0 in
+    M.(
+      for i = 0 to Int.(n-1) do
+        let ti = t0 +. float i *. h
+        and xi = xt.(i) in
+        let ti5 = ti +. 0.5 *. h in
+        let k1 = h * f ti xi in
+        let k2 = h * f ti5 (xi + 0.5 * k1) in
+        let k3 = h * f ti5 (xi + 0.5 * k2) in
+        let k4 = h * f (ti +. h) (xi + k3) in
+        xt.(Int.(i + 1)) <- xi + onesixth * (k1 + k4) + onethird * (k2 + k3)
+      done);
+    xt</pre>
+
+    </p>
+
+
+    <h3 id="pa_infix">pa_infix</h3>
+
+    <p>The purpose of <code>pa_infix</code> is to be able to say, for
+      any OCaml operator symbol, whether one wants it as prefix,
+      postfix or binary infix.  It also allows to set the
+      associativity and precedence of operators.  The easier way to
+      use it is to use
+      the <a href="api/Pa_infix.html#concrete">concrete syntax</a>.
+      For example to turn <code>&lt;+&gt;</code> into an binary infix
+      operator at the same level as <code>+</code>, you just write in
+      your source code:
+
+      <pre>INFIX ( &lt;+&gt; ) LEVEL ( + )
+let ( &lt;+&gt; ) x y = (* definition of the operation *)</pre>
+
+      To turn <code>++</code> into a post operator &mdash; thus
+      binding stronger than function application &mdash; simply use
+
+      <pre>POSTFIX ( ++ )</pre>
+
+      You can then, for example, define it with <code>let ( ++ ) x = x
+      + 1</code> and use it: <code>let z = 3 ++</code>.  This
+      extension also allows to define purely alphabetical operators
+      (no digits, no underscore, no prime):
+
+      <pre>INFIX subset LEVEL ( &amp;&amp; )</pre>
+
+      Such an operator is used as the standard OCaml alphabetical
+      operators such as <code>lsl</code>: define it with <code>let
+      (&nbsp;subset&nbsp;) = ...</code> and use it with <code>a subset
+      x</code>.
+
+      Beware that these operators become keywords and can therefore
+      not be used as variable names anymore.
+    </p>
+    <p>
+      If your definitions may be useful in several source files, we
+      recommend you create a syntax extension module instead and use the 
+      <a href="api/Pa_infix.html#api">API</a>.
+    </p>
+
+    <img src="pa_do.png" atl="Interactive session with the Emacs Tuareg mode" />
+
+    <br/><br/><br/>
+
+    <h2 id="contributing">Getting the development version and contributing</h2>
+
+    <p> This project uses <a href="http://bazaar-vcs.org/">bzr</a> as
+      its source control management.  You can download the source and
+      its history with
+
+      <pre>bzr branch http://bzr.ocamlcore.org/pa-do/pa-do/trunk pa-do</pre>
+
+      You can then hack on the code, commiting your modifications, and
+      then submit your changes with
+
+      <pre>bzr&nbsp;bundle&nbsp;&gt;&nbsp;<em class="replaceable">file</em>.patch</pre>
+
+      (and post <code><em class="replaceable">file</em>.patch</code>
+      to
+      the <a href="https://forge.ocamlcore.org/tracker/?group_id=40"
+      >one of the trackers</a>) or
+
+      <pre>bzr send</pre>
+
+      (and email the bundle to one of the developers).
+    </p>
+    <p>
+      For your convenience, a copy of the history is kept in the
+      <a href="https://forge.ocamlcore.org/scm/?group_id=40">SVN
+      repository</a> (it may be updated slightly less frequently than
+      the bzr repository).  Here is more information
+      on <a href="bzr.html">how to use bzr with OCamlForge</a>.
+    </p>
+
+    </div> <!-- main -->
+
+
+  </body>
+</html>

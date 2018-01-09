@@ -1,0 +1,9 @@
+USEPDFLATEX = true
+
+# Only compile to PDF:
+doc: $(filter %.pdf, $(LaTeXDocument talk, talk))
+
+clean:
+  rm -f $(glob *.aux *.dvi *.fls *.log *.nav *.out *.pdf *.ps *.snm *.toc)
+  # AUCTeX directory:
+  rm -rf auto/

@@ -1,0 +1,24 @@
+This example is based on the paper
+
+  Hans Koch, Alain Schenkel, Peter Wittwer,
+  Computer-Assisted Proofs in Analysis and Programming in Logic: A Case Study,
+  SIAM Review, Volume 38, Issue 4 (December 1996), Pages: 565-604
+
+We recommend that you download a copy of the paper from
+http://www.ma.utexas.edu/cgi-bin/mps?src=a&key=koch or
+http://pcc2341f.unige.ch/publications/paper020/94-394_ps.pdf to be
+able to follow the code (variable names have been chosen to be close
+to the math or Prolog implementation of the paper in order to ease the
+reader's understanding).
+
+As you will see, the code is IMHO more readable than the one in the
+paper and has about half the number of lines (without comments).  The
+interest of the code as an example of Delimited Overloading lies in
+the various layers of abstraction, each needing its own arithmetic
+operators.  Reinterpretation of constants is also interesting for
+interval arithmetic and simplifies many expressions.  We have used the
+concrete syntax instead of a separate syntax extension (which would
+have permitted to perform some optimizations like caching constants)
+to show how easy it is to use Delimited Overloading for your own
+purposes (of course, for libraries, we recommend creating reusable
+syntax extensions using the API).

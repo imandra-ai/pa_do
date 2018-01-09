@@ -1,0 +1,297 @@
+#								-*-conf-*-
+OASISFormat: 0.3
+Name:        pa_do
+Version:     0.8.16
+Synopsis:    Syntax extension module to enable easy local overloading of
+  operators and functions.
+Description: Delimited overloading is a syntax extension to ease the
+  writing of efficient arithmetic expressions in OCaml.  It allows
+  out of the box to use the usual arithmetic operators for Int32, Int64,
+  Nativeint, Num, and Complex.  A fake "Float" module is also provided.
+  Some optimizations are performed, in particular for the module Complex.
+  .
+  This syntax extension can be further extended: you can write
+  overloadings for your own modules using either the concrete syntax
+  or by writing a small syntax module.
+Authors:     Christophe Troestler <Christophe.Troestler@umons.ac.be>,
+  Dany Maslowski <dan_mski@hotmail.com>,
+  Julie De Pril <julie.depril@umons.ac.be>
+License:     LGPL-2.1 with OCaml linking exception
+Maintainers: Christophe Troestler <Christophe.Troestler@umons.ac.be>
+Homepage:    http://pa-do.forge.ocamlcore.org/
+OCamlVersion: >= 3.12
+Plugins:     StdFiles (0.3)
+FilesAB:     src/META.ab, pa_do.godiva.ab
+
+Flag examples
+  Description: Build the examples.
+
+Library pa_do
+  Path:       src
+  BuildTools: ocamlbuild
+  Pack:		    true
+  Modules:	    Macro, Delimited_overloading, Std, Monad
+  BuildDepends:     camlp4.quotations.o, camlp4.lib, camlp4.extend
+  ByteOpt:	    -I +compiler-libs
+  NativeOpt:	    -I +compiler-libs
+  XMETADescription: Delimited overloading syntax extension
+  XMETARequires:    camlp4
+
+Library pa_do_nums
+  Path:       src
+  BuildTools: ocamlbuild
+  Modules:    Pa_do_nums
+  BuildDepends:     camlp4.quotations.o, camlp4.lib, camlp4.extend
+  FindlibName:      num
+  FindlibParent:    pa_do
+  XMETADescription: Overloading for arbitrary-precision numbers.
+  XMETARequires:    pa_do, num
+#  XMETARequires:    num-top
+
+Library pa_infix
+  Path:       src
+  BuildTools: ocamlbuild
+  Modules:    Pa_infix
+  BuildDepends:     camlp4.quotations.o, camlp4.lib, camlp4.extend
+  XMETADescription: Set priority and associativity of unary and binary operators.
+  FindlibName:   infix
+  FindlibParent: pa_do
+
+Library pa_do_top
+  Path:       src
+  BuildTools: ocamlbuild
+  Modules:    Pa_do_top
+  XMETADescription: Toplevel module for pa_do.
+  # Important for the install script:
+  FindlibParent: pa_do
+
+Library pa_do_top_make
+  Path:       src
+  BuildTools: ocamlbuild
+  Modules:    Pa_do_top_make
+  XMETADescription: Toplevel module for pa_do (loads camlp4o).
+  FindlibParent: pa_do
+
+Document API
+  Title:           API reference for Delimited Overloading
+  Type:            OCamlbuild (0.3)
+  InstallDir:      $docdir/api
+  BuildTools:      ocamldoc, ocamlbuild
+  XOCamlbuildPath: src/
+  # pa_do inserted by hand as it is composed of packed modules:
+  XOCamlbuildLibraries: pa_do.num, pa_do.infix
+
+
+# Tests
+######################################################################
+Executable op_basic
+  Path:           tests
+  Build$:	  flag(tests)
+  MainIs:         op_basic.ml
+  BuildDepends:   pa_do, unix, camlp4.lib, str
+  BuildTools:     ocamlbuild
+  Install:        false
+
+Executable op_mix
+  Path:           tests
+  Build$:	  flag(tests)
+  MainIs:         op_mix.ml
+  BuildDepends:   pa_do, unix, camlp4.lib, str
+  BuildTools:     ocamlbuild
+  Install:        false
+
+Executable op_concrete
+  Path:           tests
+  Build$:	  flag(tests)
+  MainIs:         op_concrete.ml
+  BuildDepends:   pa_do, unix, camlp4.lib, str
+  BuildTools:     ocamlbuild
+  Install:        false
+
+Executable do_std
+  Path:           tests
+  Build$:	  flag(tests)
+  MainIs:         do_std.ml
+  BuildDepends:   pa_do, unix, camlp4.lib, str
+  BuildTools:     ocamlbuild
+  Install:        false
+
+Executable do_concrete
+  Path:           tests
+  Build$:	  flag(tests)
+  MainIs:         do_concrete.ml
+  BuildDepends:   pa_do, unix, camlp4.lib, str
+  BuildTools:     ocamlbuild
+  Install:        false
+
+Executable do_api
+  Path:           tests
+  Build$:	  flag(tests)
+  MainIs:         do_api.ml
+  BuildDepends:   pa_do, unix, camlp4.lib, str
+  BuildTools:     ocamlbuild
+  Install:        false
+
+Executable test_macro
+  Path:           tests
+  Build$:	  flag(tests)
+  MainIs:         test_macro.ml
+  BuildDepends:   pa_do, unix, camlp4.lib, str
+  BuildTools:     ocamlbuild
+  Install:        false
+
+Executable test_complex
+  Path:           tests
+  Build$:	  flag(tests)
+  MainIs:         test_complex.ml
+  BuildDepends:   pa_do, unix, camlp4.lib, str
+  BuildTools:     ocamlbuild
+  Install:        false
+
+Test op_basic
+  Type: Custom (0.2)
+  Command: $op_basic -I _build/src/
+
+Test op_mix
+  Type: Custom (0.2)
+  Command: $op_mix -I _build/src/
+
+Test op_concrete
+  Type: Custom (0.2)
+  Command: $op_concrete -I _build/src/
+
+Test do_std
+  Type: Custom (0.2)
+  Command: $do_std -I _build/src/
+
+Test do_concrete
+  Type: Custom (0.2)
+  Command: $do_concrete -I _build/src/
+
+Test do_api
+  Type: Custom (0.2)
+  Command: $do_api -I _build/src/
+
+Test test_macro
+  Type: Custom (0.2)
+  Command: $test_macro -I _build/src/
+
+Test test_complex
+  Type: Custom (0.2)
+  Command: $test_complex -I _build/src/
+
+# Examples
+######################################################################
+# The examples do not depend on pa_do as executables.  See
+# myocamlbuild.ml for the dependencies for the preprocessing.
+
+Executable ad_hoc_newton
+  Path:           examples/
+  Build$:	  flag(examples)
+  MainIs:         ad_hoc_newton.ml
+  BuildDepends:   num
+  BuildTools:     ocamlbuild
+  Install:        false
+
+Executable comp_diff
+  Path:           examples/
+  Build$:	  flag(examples)
+  MainIs:         comp_diff.ml
+  BuildTools:     ocamlbuild
+  Install:        false
+
+Executable pi_digits
+  Path:           examples/
+  Build$:	  flag(examples)
+  MainIs:         pi_digits.ml
+  BuildDepends:   num
+  BuildTools:     ocamlbuild
+  Install:        false
+
+Executable rk4
+  Path:           examples/
+  Build$:	  flag(examples)
+  MainIs:         rk4.ml
+  BuildTools:     ocamlbuild
+  Install:        false
+
+Executable newton_basin
+  Path:           examples/
+  Build$:	  flag(examples)
+  MainIs:         newton_basin.ml
+  BuildDepends:   graphics
+  BuildTools:     ocamlbuild
+  Install:        false
+
+Executable newton_basin_base
+  Path:           examples/
+  Build$:	  flag(examples)
+  MainIs:         newton_basin_base.ml
+  BuildDepends:   graphics
+  BuildTools:     ocamlbuild
+  Install:        false
+
+Executable newton_cotes
+  Path:           examples/
+  Build$:	  flag(examples)
+  MainIs:         newton_cotes.ml
+  BuildDepends:   num
+  BuildTools:     ocamlbuild
+  Install:        false
+
+Executable add_vec
+  Path:           examples/add_vec/
+  Build$:	  flag(examples)
+  MainIs:         use.ml
+  BuildTools:     ocamlbuild
+  Install:        false
+
+Executable comp_assit_proof
+  Path:           examples/comp_assit_proof/
+  Build$:	  flag(examples)
+  MainIs:         contraction.ml
+  BuildDepends:   num
+  BuildTools:     ocamlbuild
+  Install:        false
+
+Executable first_order_logic
+  Path:           examples/first_order_logic/
+  Build$:	  flag(examples)
+  MainIs:         use.ml
+  BuildDepends:   num
+  BuildTools:     ocamlbuild
+  Install:        false
+
+Executable length
+  Path:           examples/length/
+  Build$:	  flag(examples)
+  MainIs:         use.ml
+  BuildTools:     ocamlbuild
+  Install:        false
+
+Executable ray
+  Path:           examples/ray_tracer/
+  Build$:	  flag(examples)
+  MainIs:         ray.ml
+  CompiledObject: best
+  NativeOpt:	  -rectypes
+  ByteOpt:	  -rectypes
+  BuildTools:     ocamlbuild
+  Install:        false
+
+Executable ray_orig
+  Path:           examples/ray_tracer/
+  Build$:	  flag(examples)
+  MainIs:         ray_orig.ml
+  CompiledObject: best
+  NativeOpt:	  -rectypes
+  ByteOpt:	  -rectypes
+  BuildTools:     ocamlbuild
+  Install:        false
+
+
+
+SourceRepository trunk
+  Type:       git
+  Location:   http://forge.ocamlcore.org/anonscm/git/pa-do/pa-do.git
+  Browser:    http://forge.ocamlcore.org/scm/browser.php?group_id=40

@@ -1,0 +1,20 @@
+Package: godi-$(pkg_name)
+Version: $(pkg_version)
+Revision: 0
+Depends: godi-ocaml (>= 3.10), godi-findlib (>= 1.2)
+Build-Depends: godi-findlib (>= 1.2)
+Sources: http://forge.ocamlcore.org/frs/download.php/$(ocamlforge_file_no)/$(pkg_name)-$(pkg_version).tar.gz
+Homepage: http://pa-do.forge.ocamlcore.org/
+Maintainer: Christophe Troestler <Christophe.Troestler@umons.ac.be>
+Options: opt
+Docfiles: README, LICENSE
+Description: Local overloading of operators and functions.
+A syntax extension to ease the writing of efficient arithmetic expressions
+and other forms of overlodings.
+.
+
+(* Local Variables: *)
+(* mode: conf-colon *)
+(* comment-start: "(*" *)
+(* comment-end: "*)" *)
+(* End: *)

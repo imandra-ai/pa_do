@@ -1,0 +1,12 @@
+#!/bin/sh
+
+FORGE=shell.forge.ocamlcore.org:/home/groups/pa-do/htdocs
+
+# From the root dir:
+omake doc
+
+cd doc/web
+scp *.html *.css $FORGE
+
+cd ../html
+scp -r * $FORGE/api

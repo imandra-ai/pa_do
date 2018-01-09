@@ -1,0 +1,62 @@
+# 							-*-conf-unix-*-
+*.cmi
+*.cmo
+*.cmx
+*.cmxs
+*.cma
+*.cmxa
+*.so
+*.annot
+*.o
+*.a
+*.byte
+*.native
+_build/
+*.odocl
+src/*.mlpack
+src/*.mllib
+setup.data
+AUTHORS.txt
+INSTALL.txt
+README.txt
+src/META
+pa_do.godiva
+*.tar.gz
+# generated doc
+doc/html
+# Test programs 
+*.run
+*.opt
+tests/op_*
+!tests/op_*.ml
+tests/do_*
+!tests/do_*.ml
+tests/test_*
+!tests/test_*.ml
+tests/error_loc
+# Examples programs
+*/use
+examples/comp_diff
+examples/length/use
+examples/add_vec/use
+examples/pi_digits
+examples/rk4
+examples/newton_basin
+examples/newton_basin_base
+examples/ray_tracer/ray
+examples/ray_tracer/ray_orig
+examples/newton_cotes
+examples/comp_assit_proof/contraction
+examples/ad_hoc_newton
+# LaTeX generated files and AUCTeX dir
+*/auto/
+*.aux
+*.dvi
+*.fls
+*.log
+*.nav
+*.out
+*.pdf
+*.ps
+*.snm
+*.toc
