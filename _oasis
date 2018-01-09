@@ -21,7 +21,7 @@ Maintainers: Christophe Troestler <Christophe.Troestler@umons.ac.be>
 Homepage:    http://pa-do.forge.ocamlcore.org/
 OCamlVersion: >= 3.12
 Plugins:     StdFiles (0.3)
-FilesAB:     src/META.ab, pa_do.godiva.ab
+FilesAB:     src/META.ab
 
 Flag examples
   Description: Build the examples.

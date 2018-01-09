@@ -1,8 +1,9 @@
 # OASIS_START
-# DO NOT EDIT (digest: c0d33189419f1e383427e62a9afbfedc)
-# Ignore VCS directories, you can use the same kind of rule outside 
-# OASIS_START/STOP if you want to exclude directories that contains 
+# DO NOT EDIT (digest: 7774b5cf8d52ea3d57d7874996f08ed6)
+# Ignore VCS directories, you can use the same kind of rule outside
+# OASIS_START/STOP if you want to exclude directories that contains
 # useless stuff for the build process
+true: annot, bin_annot
 <**/.svn>: -traverse
 <**/.svn>: not_hygienic
 ".bzr": -traverse
@@ -20,82 +21,82 @@
 "src/std.cmx": for-pack(Pa_do)
 "src/monad.cmx": for-pack(Pa_do)
 <src/pa_do.{cma,cmxa}>: oasis_library_pa_do_byte
-<src/*.ml{,i}>: oasis_library_pa_do_byte
+<src/*.ml{,i,y}>: oasis_library_pa_do_byte
 <src/pa_do.{cma,cmxa}>: oasis_library_pa_do_native
-<src/*.ml{,i}>: oasis_library_pa_do_native
+<src/*.ml{,i,y}>: oasis_library_pa_do_native
 # Library pa_do_nums
 "src/pa_do_nums.cmxs": use_pa_do_nums
 # Library pa_infix
 "src/pa_infix.cmxs": use_pa_infix
-<src/*.ml{,i}>: pkg_camlp4.lib
-<src/*.ml{,i}>: pkg_camlp4.quotations.o
-<src/*.ml{,i}>: pkg_camlp4.extend
+<src/*.ml{,i,y}>: pkg_camlp4.extend
+<src/*.ml{,i,y}>: pkg_camlp4.lib
+<src/*.ml{,i,y}>: pkg_camlp4.quotations.o
 # Library pa_do_top
 "src/pa_do_top.cmxs": use_pa_do_top
 # Library pa_do_top_make
 "src/pa_do_top_make.cmxs": use_pa_do_top_make
 # Executable op_basic
-"tests/op_basic.byte": use_pa_do
-"tests/op_basic.byte": pkg_unix
-"tests/op_basic.byte": pkg_camlp4.lib
-"tests/op_basic.byte": pkg_str
-"tests/op_basic.byte": pkg_camlp4.quotations.o
 "tests/op_basic.byte": pkg_camlp4.extend
+"tests/op_basic.byte": pkg_camlp4.lib
+"tests/op_basic.byte": pkg_camlp4.quotations.o
+"tests/op_basic.byte": pkg_str
+"tests/op_basic.byte": pkg_unix
+"tests/op_basic.byte": use_pa_do
 # Executable op_mix
-"tests/op_mix.byte": use_pa_do
-"tests/op_mix.byte": pkg_unix
-"tests/op_mix.byte": pkg_camlp4.lib
-"tests/op_mix.byte": pkg_str
-"tests/op_mix.byte": pkg_camlp4.quotations.o
 "tests/op_mix.byte": pkg_camlp4.extend
+"tests/op_mix.byte": pkg_camlp4.lib
+"tests/op_mix.byte": pkg_camlp4.quotations.o
+"tests/op_mix.byte": pkg_str
+"tests/op_mix.byte": pkg_unix
+"tests/op_mix.byte": use_pa_do
 # Executable op_concrete
-"tests/op_concrete.byte": use_pa_do
-"tests/op_concrete.byte": pkg_unix
-"tests/op_concrete.byte": pkg_camlp4.lib
-"tests/op_concrete.byte": pkg_str
-"tests/op_concrete.byte": pkg_camlp4.quotations.o
 "tests/op_concrete.byte": pkg_camlp4.extend
+"tests/op_concrete.byte": pkg_camlp4.lib
+"tests/op_concrete.byte": pkg_camlp4.quotations.o
+"tests/op_concrete.byte": pkg_str
+"tests/op_concrete.byte": pkg_unix
+"tests/op_concrete.byte": use_pa_do
 # Executable do_std
-"tests/do_std.byte": use_pa_do
-"tests/do_std.byte": pkg_unix
-"tests/do_std.byte": pkg_camlp4.lib
-"tests/do_std.byte": pkg_str
-"tests/do_std.byte": pkg_camlp4.quotations.o
 "tests/do_std.byte": pkg_camlp4.extend
+"tests/do_std.byte": pkg_camlp4.lib
+"tests/do_std.byte": pkg_camlp4.quotations.o
+"tests/do_std.byte": pkg_str
+"tests/do_std.byte": pkg_unix
+"tests/do_std.byte": use_pa_do
 # Executable do_concrete
-"tests/do_concrete.byte": use_pa_do
-"tests/do_concrete.byte": pkg_unix
-"tests/do_concrete.byte": pkg_camlp4.lib
-"tests/do_concrete.byte": pkg_str
-"tests/do_concrete.byte": pkg_camlp4.quotations.o
 "tests/do_concrete.byte": pkg_camlp4.extend
+"tests/do_concrete.byte": pkg_camlp4.lib
+"tests/do_concrete.byte": pkg_camlp4.quotations.o
+"tests/do_concrete.byte": pkg_str
+"tests/do_concrete.byte": pkg_unix
+"tests/do_concrete.byte": use_pa_do
 # Executable do_api
-"tests/do_api.byte": use_pa_do
-"tests/do_api.byte": pkg_unix
-"tests/do_api.byte": pkg_camlp4.lib
-"tests/do_api.byte": pkg_str
-"tests/do_api.byte": pkg_camlp4.quotations.o
 "tests/do_api.byte": pkg_camlp4.extend
+"tests/do_api.byte": pkg_camlp4.lib
+"tests/do_api.byte": pkg_camlp4.quotations.o
+"tests/do_api.byte": pkg_str
+"tests/do_api.byte": pkg_unix
+"tests/do_api.byte": use_pa_do
 # Executable test_macro
-"tests/test_macro.byte": use_pa_do
-"tests/test_macro.byte": pkg_unix
-"tests/test_macro.byte": pkg_camlp4.lib
-"tests/test_macro.byte": pkg_str
-"tests/test_macro.byte": pkg_camlp4.quotations.o
 "tests/test_macro.byte": pkg_camlp4.extend
+"tests/test_macro.byte": pkg_camlp4.lib
+"tests/test_macro.byte": pkg_camlp4.quotations.o
+"tests/test_macro.byte": pkg_str
+"tests/test_macro.byte": pkg_unix
+"tests/test_macro.byte": use_pa_do
 # Executable test_complex
-"tests/test_complex.byte": use_pa_do
-"tests/test_complex.byte": pkg_unix
-"tests/test_complex.byte": pkg_camlp4.lib
-"tests/test_complex.byte": pkg_str
-"tests/test_complex.byte": pkg_camlp4.quotations.o
 "tests/test_complex.byte": pkg_camlp4.extend
-<tests/*.ml{,i}>: use_pa_do
-<tests/*.ml{,i}>: pkg_unix
-<tests/*.ml{,i}>: pkg_camlp4.lib
-<tests/*.ml{,i}>: pkg_str
-<tests/*.ml{,i}>: pkg_camlp4.quotations.o
-<tests/*.ml{,i}>: pkg_camlp4.extend
+"tests/test_complex.byte": pkg_camlp4.lib
+"tests/test_complex.byte": pkg_camlp4.quotations.o
+"tests/test_complex.byte": pkg_str
+"tests/test_complex.byte": pkg_unix
+"tests/test_complex.byte": use_pa_do
+<tests/*.ml{,i,y}>: pkg_camlp4.extend
+<tests/*.ml{,i,y}>: pkg_camlp4.lib
+<tests/*.ml{,i,y}>: pkg_camlp4.quotations.o
+<tests/*.ml{,i,y}>: pkg_str
+<tests/*.ml{,i,y}>: pkg_unix
+<tests/*.ml{,i,y}>: use_pa_do
 # Executable ad_hoc_newton
 "examples/ad_hoc_newton.byte": pkg_num
 # Executable comp_diff
@@ -106,28 +107,28 @@
 "examples/newton_basin.byte": pkg_graphics
 # Executable newton_basin_base
 "examples/newton_basin_base.byte": pkg_graphics
-<examples/*.ml{,i}>: pkg_graphics
+<examples/*.ml{,i,y}>: pkg_graphics
 # Executable newton_cotes
 "examples/newton_cotes.byte": pkg_num
-<examples/*.ml{,i}>: pkg_num
+<examples/*.ml{,i,y}>: pkg_num
 # Executable add_vec
 # Executable comp_assit_proof
 "examples/comp_assit_proof/contraction.byte": pkg_num
-<examples/comp_assit_proof/*.ml{,i}>: pkg_num
+<examples/comp_assit_proof/*.ml{,i,y}>: pkg_num
 # Executable first_order_logic
 "examples/first_order_logic/use.byte": pkg_num
-<examples/first_order_logic/*.ml{,i}>: pkg_num
+<examples/first_order_logic/*.ml{,i,y}>: pkg_num
 # Executable length
 # Executable ray
 <examples/ray_tracer/ray.{native,byte}>: oasis_executable_ray_byte
-<examples/ray_tracer/*.ml{,i}>: oasis_executable_ray_byte
+<examples/ray_tracer/*.ml{,i,y}>: oasis_executable_ray_byte
 <examples/ray_tracer/ray.{native,byte}>: oasis_executable_ray_native
-<examples/ray_tracer/*.ml{,i}>: oasis_executable_ray_native
+<examples/ray_tracer/*.ml{,i,y}>: oasis_executable_ray_native
 # Executable ray_orig
 <examples/ray_tracer/ray_orig.{native,byte}>: oasis_executable_ray_orig_byte
-<examples/ray_tracer/*.ml{,i}>: oasis_executable_ray_orig_byte
+<examples/ray_tracer/*.ml{,i,y}>: oasis_executable_ray_orig_byte
 <examples/ray_tracer/ray_orig.{native,byte}>: oasis_executable_ray_orig_native
-<examples/ray_tracer/*.ml{,i}>: oasis_executable_ray_orig_native
+<examples/ray_tracer/*.ml{,i,y}>: oasis_executable_ray_orig_native
 # OASIS_STOP
 
 <**/*.ml>: annot

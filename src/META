@@ -1,0 +1,31 @@
+# Findlib META file for pa_do			                    -*-conf-*-
+# ocamlfind flags to use: -syntax camlp4o -package pa_do
+name = "pa_do"
+version = "0.8.16"
+description = "Delimited overloading syntax extension & infix"
+requires(preprocessor) = "camlp4"
+archive(syntax,preprocessor) = "pa_do.cma"
+archive(byte,toploop,camlp4o) = "pa_do.cma pa_do_top.cma"
+# #camlp4o;; was not issued:
+archive(byte,toploop) = "pa_do_top_make.cma"
+# FIXME: "error" does not work in the toplevel
+error(camlp4r) = "Not compatible with the revised syntax."
+# FIXME: do we want to split off the macro package?
+error(camlp4.macro) = "Delimited overloading provides improved macros."
+
+package "num" (
+  description = "Overloading for arbitrary-precision numbers"
+  version = "0.8.16"
+  requires = "pa_do, num"
+  archive(syntax,preprocessor) = "nums.cma pa_do_nums.cma"
+  requires(toploop) += "num-top"
+  archive(camlp4o,byte,toploop) = "pa_do_nums.cma"
+)
+
+package "infix" (
+  description = "Set priority and associativity of unary and binary operators"
+  version = "0.8.16"
+  requires = "camlp4"
+  archive(syntax,preprocessor) = "pa_infix.cma"
+  archive(camlp4o,syntax,toploop) = "pa_infix.cma"
+)
