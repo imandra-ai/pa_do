@@ -32,11 +32,6 @@ upload-doc: doc
 	$(SCP) -r _build/src/API.docdir/ $(WEB)
 	cd doc/web && $(SCP) *.html *.css *.png $(WEB)
 
-# Assume the environment variable $GODI_LOCALBASE is set
-.PHONY: godi
-godi: pa_do.godiva
-	godiva $<
-
 # "Force" a tag to be defined for each released tarball
 .PHONY: dist tar
 dist tar: $(DISTFILES)
